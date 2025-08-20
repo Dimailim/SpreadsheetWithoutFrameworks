@@ -1,0 +1,24 @@
+{
+  "name": "excelwithoutframeworks",
+  "version": "1.0.0",
+  "description": "Trainee project: Excel without frameworks",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "keywords": [
+    "Trainee",
+    "practice",
+    "JS"
+  ],
+  "author": "Dimailim",
+  "private": "true",
+  "license": "ISC",
+  "devDependencies": {
+    "copy-webpack-plugin": "^13.0.1",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.100.1",
+    "webpack-cli": "^6.0.1"
+  }
+}
