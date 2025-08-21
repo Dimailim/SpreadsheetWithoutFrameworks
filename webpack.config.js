@@ -3,65 +3,73 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
-	context: path.resolve(__dirname, 'src'),
-	entry: {
-		main: [
-			'core-js/stable',
-			'regenerator-runtime/runtime',
-			'./index.js'
-		]
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].bundle.js'
-	},
-	resolve: {
-		extensions: ['.js'],
-		alias: {
-			'@': path.resolve(__dirname, 'src'),
-			'@core': path.resolve(__dirname, 'src', 'core'),
-		}
-	},
-	plugins: [
-		new HtmlWebpackPlugin({
-			template: './index.html',
-		}),
-		new CopyPlugin({
-			patterns: [
-				{
-					from: path.resolve(__dirname, 'src', 'favicon.ico'),
-					to: path.resolve(__dirname, 'dist')
-				},
+module.exports = (env, argv) => {
+	const isProd = argv.mode === 'production';
+	const isDev = !isProd;
+
+	const filename = (ext) =>  isProd ? `[name].[contenthash].bundle.${ext}` : `[name].bundle.${ext}`;
+	return {
+		context: path.resolve(__dirname, 'src'),
+		entry: {
+			main: [
+				'core-js/stable',
+				'regenerator-runtime/runtime',
+				'./index.js'
 			]
-		}),
-		new MiniCssExtractPlugin({
-			filename: '[name].bundle.css',
-		})
-	],
-	module: {
-		rules: [
-			{
-				test: /\.s[ac]ss$/i,
-				use: [
-					MiniCssExtractPlugin.loader,
-					// Translates CSS into CommonJS
-					"css-loader",
-					// Compiles Sass to CSS
-					"sass-loader",
-				],
-			},
-			{
-				test: /\.m?js$/,
-				exclude: /node_modules/,
-				use: {
-					loader: "babel-loader",
-					options: {
-						presets: ['@babel/preset-env']
+		},
+		output: {
+			path: path.resolve(__dirname, 'dist'),
+			filename: filename('js'),
+			clean: true
+		},
+		devtool: isDev ? 'source-map' : false,
+		resolve: {
+			extensions: ['.js'],
+			alias: {
+				'@': path.resolve(__dirname, 'src'),
+				'@core': path.resolve(__dirname, 'src', 'core'),
+			}
+		},
+		plugins: [
+			new HtmlWebpackPlugin({
+				template: './index.html',
+			}),
+			new CopyPlugin({
+				patterns: [
+					{
+						from: path.resolve(__dirname, 'src', 'favicon.ico'),
+						to: path.resolve(__dirname, 'dist')
+					},
+				]
+			}),
+			new MiniCssExtractPlugin({
+				filename: filename('css'),
+			})
+		],
+		module: {
+			rules: [
+				{
+					test: /\.s[ac]ss$/i,
+					use: [
+						MiniCssExtractPlugin.loader,
+						// Translates CSS into CommonJS
+						"css-loader",
+						// Compiles Sass to CSS
+						"sass-loader",
+					],
+				},
+				{
+					test: /\.m?js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: ['@babel/preset-env']
+						}
 					}
 				}
-			}
-		],
+			],
 
+		}
 	}
 }
