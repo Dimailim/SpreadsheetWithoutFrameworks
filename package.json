@@ -14,7 +14,17 @@
   ],
   "author": "Dimailim",
   "private": "true",
-  "browserslist": "> 0.25%, not dead",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.28.3",
