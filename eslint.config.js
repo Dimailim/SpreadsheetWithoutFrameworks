@@ -39,5 +39,6 @@ module.exports = defineConfig([{
     'comma-dangle': 'off',
     'no-tabs': 'off',
     'no-mixed-spaces-and-tabs': 'off',
+    'linebreak-style': 'off'
   },
 }]);
