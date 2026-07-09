@@ -2,6 +2,7 @@
 @use "./components/toolbar";
 @use "./components/formula";
 @use "./components/table";
+@use "./components/dashboard";
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "~normalize.css";
@@ -18,4 +19,8 @@ body {
 
 .excel {
   position: relative;
+  color: #888;
+  height: 100%;
+  max-width: 100%;
+  font-size: .8rem;
 }
