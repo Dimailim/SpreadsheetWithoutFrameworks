@@ -10,10 +10,16 @@ const CODES = {
  * @returns {string} - HTML markup.
  */
 function createRow(content, rowIndex) {
-  return `<div class="row">
-    <div class="row-info">${rowIndex ? rowIndex : ''}</div>
-    <div class="row-data">${content}</div>
-  </div>`;
+  const resize = rowIndex ? `<div class="row-resize"></div>` : ''
+  return `
+    <div class="row">
+        <div class="row-info">
+            ${rowIndex ? rowIndex : ''}
+            ${resize}
+        </div>
+        <div class="row-data">${content}</div>
+    </div>
+  `;
 }
 
 /**
@@ -22,7 +28,12 @@ function createRow(content, rowIndex) {
  * @returns {string} - HTML markup.
  */
 function createColumn(content) {
-  return `<div class="column">${content}</div>`;
+  return `
+    <div class="column">
+        ${content}
+        <div class="column-resize"></div>
+    </div>
+  `;
 }
 
 /**
