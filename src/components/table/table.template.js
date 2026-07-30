@@ -10,7 +10,7 @@ const CODES = {
  * @returns {string} - HTML markup.
  */
 function createRow(content, rowIndex) {
-  const resize = rowIndex ? `<div class="row-resize"></div>` : ''
+  const resize = rowIndex ? `<div class="row-resize" data-resize="row"></div>` : '';
   return `
     <div class="row">
         <div class="row-info">
@@ -31,7 +31,7 @@ function createColumn(content) {
   return `
     <div class="column">
         ${content}
-        <div class="column-resize"></div>
+        <div class="column-resize" data-resize="column"></div>
     </div>
   `;
 }

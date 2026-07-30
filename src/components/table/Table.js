@@ -7,7 +7,7 @@ export default class Table extends CommonComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      /* listeners: ['click', 'mousedown', 'mousemove', 'mouseup']*/
+      listeners: ['mousedown']
     });
   }
 
@@ -15,10 +15,13 @@ export default class Table extends CommonComponent {
     return createTable();
   }
 
-  /* onMousedown(event) {
-    console.log('mousedown', event);
+  onMousedown(event) {
+    if (event.target.dataset.resize) {
+      console.log('Start resizing', event.target.dataset.resize);
+    }
   }
 
+  /*
   onClick(event) {
     console.log('onClick', event);
   }
