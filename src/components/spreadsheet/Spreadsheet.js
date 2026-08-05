@@ -26,7 +26,6 @@ export default class Spreadsheet {
       const component = new Component($element);
       $element.setValue(component.toHtml());
       $root.append($element);
-      console.log(component);
       return component;
     });
 

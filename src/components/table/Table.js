@@ -1,5 +1,6 @@
 import CommonComponent from '@core/СommonComponent';
 import {createTable} from '@/components/table/table.template';
+import $ from '@core/dom';
 
 export default class Table extends CommonComponent {
   static className = 'excel__table';
@@ -17,7 +18,19 @@ export default class Table extends CommonComponent {
 
   onMousedown(event) {
     if (event.target.dataset.resize) {
-      console.log('Start resizing', event.target.dataset.resize);
+      const $resizer = $(event.target);
+      const $headColumn = $resizer.closest('[data-type="resizable"]');
+      const headColumnsCoords = $headColumn.getCoords();
+      console.log(headColumnsCoords);
+
+      document.onmousemove = (e) => {
+        const delta = e.pageX - headColumnsCoords.right;
+        const widthValue = headColumnsCoords.width + delta;
+        $headColumn.$nativeElement.style.width = `${widthValue}px`;
+      };
+      document.onmouseup = () => {
+        document.onmousemove = null;
+      };
     }
   }
 

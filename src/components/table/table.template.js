@@ -29,7 +29,7 @@ function createRow(content, rowIndex) {
  */
 function createColumn(content) {
   return `
-    <div class="column">
+    <div class="column" data-type="resizable">
         ${content}
         <div class="column-resize" data-resize="column"></div>
     </div>

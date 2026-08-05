@@ -70,6 +70,23 @@ class Dom {
   off(eventType, callback) {
     this.$nativeElement.removeEventListener(eventType, callback);
   }
+
+  /**
+   * Finds the closest parent element by selector.
+   * @param {string} selector
+   * @returns {Dom}
+   */
+  closest(selector) {
+    return $(this.$nativeElement.closest(selector));
+  }
+
+  /**
+   * Returns the coordinates of the element.
+   * @returns {DOMRect}
+   */
+  getCoords() {
+    return this.$nativeElement.getBoundingClientRect();
+  }
 }
 
 /**
