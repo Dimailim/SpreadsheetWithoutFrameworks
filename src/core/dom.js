@@ -70,6 +70,85 @@ class Dom {
   off(eventType, callback) {
     this.$nativeElement.removeEventListener(eventType, callback);
   }
+
+  /**
+   * Finds the closest parent element by selector.
+   * @param {string} selector
+   * @returns {Dom}
+   */
+  closest(selector) {
+    return $(this.$nativeElement.closest(selector));
+  }
+
+  /**
+   * Returns the coordinates of the element.
+   * @returns {DOMRect}
+   */
+  getCoords() {
+    return this.$nativeElement.getBoundingClientRect();
+  }
+
+  /**
+   * Adds style to the DOM element by attribute and value of attribute.
+   * @example
+   * $header.addStyle('width', '100px');
+   * @param {string} attribute
+   * @param {string|null} value
+   */
+  addStyle(attribute, value) {
+    this.$nativeElement.style[attribute] = value;
+
+    return this;
+  }
+
+  /**
+   * Adds CSS style to the DOM element by CSS object
+   * @example
+   * $header.css({
+   *   height: '100px',
+   *   backgroundColor: 'red'
+   * })
+   * @param {Object} styles
+   */
+  css(styles = {}) {
+    Object.keys(styles).forEach((key) => {
+      this.$nativeElement.style[key] = styles[key];
+    });
+
+    return this;
+  }
+
+  /**
+   * Returns dataset of the element.
+   * @returns {DOMStringMap}
+   */
+  get data() {
+    return this.$nativeElement.dataset;
+  }
+
+  /**
+   * Returns an array of DOM elements by selector.
+   * @param selector
+   * @returns {NodeListOf<HTMLElementTagNameMap[keyof HTMLElementTagNameMap]>}
+   */
+  findAll(selector) {
+    return this.$nativeElement.querySelectorAll(selector);
+  }
+
+  /**
+   * Clears inline styles properties of the DOM element.
+   * @param {string[]} props - style properties which should be cleared
+   * @example
+   * $resizer.cssClear(['width', 'height']);
+   */
+  cssClear(props) {
+    props.forEach((prop) => {
+      this.$nativeElement.style.removeProperty(prop);
+    });
+    if (!this.$nativeElement.style.length) {
+      this.$nativeElement.removeAttribute('style');
+    }
+  }
 }
 
 /**
