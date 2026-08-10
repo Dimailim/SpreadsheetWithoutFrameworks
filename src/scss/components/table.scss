@@ -25,6 +25,7 @@
     border: 1px solid v.$border-color;
     background: #f8f9fa;
     border-top: none;
+    user-select: none;
   }
   .row-data {
     display: flex;
@@ -41,6 +42,7 @@
     border: 1px solid v.$border-color;
     border-top: none;
     border-left: none;
+    user-select: none;
   }
   .cell {
     padding: 5px;
@@ -67,6 +69,7 @@
     right: 0;
     background: v.$primary-color;
     opacity: 0;
+    z-index: 2;
 
     &:hover {
       opacity: 1;

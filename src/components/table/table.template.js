@@ -12,7 +12,7 @@ const CODES = {
 function createRow(content, rowIndex) {
   const resize = rowIndex ? `<div class="row-resize" data-resize="row"></div>` : '';
   return `
-    <div class="row">
+    <div class="row" data-type="resizable">
         <div class="row-info">
             ${rowIndex ? rowIndex : ''}
             ${resize}
@@ -25,11 +25,12 @@ function createRow(content, rowIndex) {
 /**
  * Creates column templates in HTML markup.
  * @param {string} content
+ * @param {number} colIndex
  * @returns {string} - HTML markup.
  */
-function createColumn(content) {
+function createColumn(content, colIndex) {
   return `
-    <div class="column" data-type="resizable">
+    <div class="column" data-type="resizable" data-col="${colIndex}">
         ${content}
         <div class="column-resize" data-resize="column"></div>
     </div>
@@ -38,10 +39,12 @@ function createColumn(content) {
 
 /**
  * Creates cell templates in HTML markup.
+ * @param _
+ * @param {number} index
  * @returns {string} - HTML markup.
  */
-function createCell() {
-  return `<div class="cell" contenteditable="true"></div>`;
+function createCell(_, index) {
+  return `<div class="cell" contenteditable="true" data-col="${index}"></div>`;
 }
 
 /**
