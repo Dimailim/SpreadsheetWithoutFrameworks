@@ -39,12 +39,21 @@ function createColumn(content, colIndex) {
 
 /**
  * Creates cell templates in HTML markup.
- * @param _
- * @param {number} index
- * @returns {string} - HTML markup.
+ * @param {number} rowIndex
+ * @returns {function(_, number): string} - HTML markup.
  */
-function createCell(_, index) {
-  return `<div class="cell" contenteditable="true" data-col="${index}"></div>`;
+function createCell(rowIndex) {
+  return function(_, columnIndex) {
+    return `
+        <div 
+          class="cell" 
+          contenteditable="true" 
+          data-col="${columnIndex}"
+          data-id="${rowIndex}:${columnIndex}"
+          data-type="cell"
+        ></div>
+    `;
+  };
 }
 
 /**
@@ -72,12 +81,12 @@ export function createTable(rowsCount = 26) {
       .join('');
 
   rows.push(createRow(cols));
-  for (let row = 1; row <= rowsCount; row++) {
+  for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(colCount)
         .fill('')
-        .map(createCell)
+        .map(createCell(row))
         .join('');
-    rows.push(createRow(cells, row));
+    rows.push(createRow(cells, row + 1));
   }
 
   return rows.join('');

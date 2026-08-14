@@ -8,9 +8,11 @@ export default class CommonComponent extends DomListener {
   constructor($root, options = {}) {
     super($root, options.listeners);
     this.name = options.name || '';
+
+    this.prepare();
   }
 
-  // Abstract method
+  // Abstract methods
   /**
    * Returns component template.
    * @returns {string}
@@ -18,6 +20,14 @@ export default class CommonComponent extends DomListener {
   toHtml() {
     return '';
   }
+
+  /**
+   * Method can call some logic before initializing a component.
+   */
+  prepare() {
+
+  }
+
 
   /**
    * Initializes DOM listeners for a component.

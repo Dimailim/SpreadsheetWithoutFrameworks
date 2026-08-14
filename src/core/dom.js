@@ -149,6 +149,61 @@ class Dom {
       this.$nativeElement.removeAttribute('style');
     }
   }
+
+  /**
+   * Returns found DOM element by selector.
+   * @param {string} selector
+   * @returns {Dom}
+   */
+  find(selector) {
+    return $(this.$nativeElement.querySelector(selector));
+  }
+
+  /**
+   * Adds class to DOM element.
+   * @param {string} className
+   */
+  addClass(className) {
+    this.$nativeElement.classList.add(className);
+
+    return this;
+  }
+
+  /**
+   * Removes class from the DOM element.
+   * @param {string} className
+   */
+  removeClass(className) {
+    this.$nativeElement.classList.remove(className);
+
+    return this;
+  }
+
+  /**
+   * Returns id of a cell DOM element.
+   * @param {boolean} [parsed]
+   * @returns {{row: number, col: number}|string}
+   */
+  id(parsed) {
+    if (parsed) {
+      const id = this.id().split(':');
+      return {
+        row: +id[0],
+        col: +id[1],
+      };
+    }
+
+    return this.data.id;
+  }
+
+  /**
+   * Focuses on the DOM element.
+   * @returns {Dom}
+   */
+  focus() {
+    this.$nativeElement.focus();
+    return this;
+  }
 }
 
 /**
