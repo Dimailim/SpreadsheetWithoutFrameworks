@@ -18,11 +18,33 @@ class Dom {
   }
 
   /**
+   * Sets text data to a DOM element.
+   * @param {string} text
+   * @returns {Dom}
+   */
+  setText(text) {
+    this.$nativeElement.textContent = text;
+    return this;
+  }
+
+  /**
    * Returns HTML markup data from a DOM element.
    * @returns {string}
    */
   getValue() {
     return this.$nativeElement.outerHTML.trim();
+  }
+
+  /**
+   * Returns text data from a DOM element.
+   * @returns {string}
+   */
+  getText() {
+    if (this.$nativeElement.tagName.toLowerCase() === 'input') {
+      return this.$nativeElement.value.trim();
+    }
+
+    return this.$nativeElement.textContent.trim();
   }
 
   /**
@@ -148,6 +170,61 @@ class Dom {
     if (!this.$nativeElement.style.length) {
       this.$nativeElement.removeAttribute('style');
     }
+  }
+
+  /**
+   * Returns found DOM element by selector.
+   * @param {string} selector
+   * @returns {Dom}
+   */
+  find(selector) {
+    return $(this.$nativeElement.querySelector(selector));
+  }
+
+  /**
+   * Adds class to DOM element.
+   * @param {string} className
+   */
+  addClass(className) {
+    this.$nativeElement.classList.add(className);
+
+    return this;
+  }
+
+  /**
+   * Removes class from the DOM element.
+   * @param {string} className
+   */
+  removeClass(className) {
+    this.$nativeElement.classList.remove(className);
+
+    return this;
+  }
+
+  /**
+   * Returns id of a cell DOM element.
+   * @param {boolean} [parsed]
+   * @returns {{row: number, col: number}|string}
+   */
+  id(parsed) {
+    if (parsed) {
+      const id = this.id().split(':');
+      return {
+        row: +id[0],
+        col: +id[1],
+      };
+    }
+
+    return this.data.id;
+  }
+
+  /**
+   * Focuses on the DOM element.
+   * @returns {Dom}
+   */
+  focus() {
+    this.$nativeElement.focus();
+    return this;
   }
 }
 

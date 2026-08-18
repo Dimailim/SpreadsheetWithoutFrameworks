@@ -1,4 +1,5 @@
 import $ from '@core/dom';
+import Emitter from '@core/Emitter';
 
 /**
  * Main application entry point
@@ -12,6 +13,7 @@ export default class Spreadsheet {
   constructor(selector, options) {
     this.$element = $(selector);
     this.components = options.components || [];
+    this.emitter = new Emitter();
   }
 
   /**
@@ -20,10 +22,13 @@ export default class Spreadsheet {
    */
   getRoot() {
     const $root = $.create('div', 'excel');
+    const componentOptions = {
+      emitter: this.emitter
+    };
 
     this.components = this.components.map((Component) => {
       const $element = $.create('div', Component.className);
-      const component = new Component($element);
+      const component = new Component($element, componentOptions);
       $element.setValue(component.toHtml());
       $root.append($element);
       return component;
@@ -41,9 +46,9 @@ export default class Spreadsheet {
   }
 
   /**
-   * Destroys component listeners.
+   * Destroys components.
    */
-  unMount() {
+  destroy() {
     this.components.forEach((component) => component.destroy());
   }
 }

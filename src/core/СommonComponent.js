@@ -8,9 +8,13 @@ export default class CommonComponent extends DomListener {
   constructor($root, options = {}) {
     super($root, options.listeners);
     this.name = options.name || '';
+    this.emitter = options.emitter;
+    this.unsubscribers = [];
+
+    this.prepare();
   }
 
-  // Abstract method
+  // Abstract methods
   /**
    * Returns component template.
    * @returns {string}
@@ -18,6 +22,33 @@ export default class CommonComponent extends DomListener {
   toHtml() {
     return '';
   }
+
+  /**
+   * Notifies listeners about the event.
+   * @param {string}eventName
+   * @param {...*}args
+   */
+  $emit(eventName, ...args) {
+    this.emitter.emit(eventName, ...args);
+  }
+
+  /**
+   * Subscribes to an event 'eventName'.
+   * @param {string} eventName
+   * @param {function} fn
+   */
+  $on(eventName, fn) {
+    const unsub = this.emitter.subscribe(eventName, fn);
+    this.unsubscribers.push(unsub);
+  }
+
+  /**
+   * Method can call some logic before initializing a component.
+   */
+  prepare() {
+
+  }
+
 
   /**
    * Initializes DOM listeners for a component.
@@ -31,5 +62,6 @@ export default class CommonComponent extends DomListener {
    */
   destroy() {
     this.removeDOMListeners();
+    this.unsubscribers.forEach((unsub) => unsub());
   }
 }

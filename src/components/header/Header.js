@@ -2,6 +2,14 @@ import CommonComponent from '@core/СommonComponent';
 
 export default class Header extends CommonComponent {
   static className = 'excel__header';
+
+  constructor($root, options) {
+    super($root, {
+      name: 'Header',
+      ...options
+    });
+  }
+
   toHtml() {
     return `
       <input 
