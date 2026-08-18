@@ -1,10 +1,10 @@
 import CommonComponent from '@core/СommonComponent';
+import $ from '@core/dom';
 import {createTable} from '@/components/table/table.template';
 import resizeHandler from '@/components/table/table.resize';
 import {shouldResize, isCell} from '@/components/table/table.functions';
 import TableSelection from '@/components/table/TableSelection';
 import {selectionKeyboardHandler, selectionMouseHandler} from '@/components/table/table.selection';
-import $ from '@core/dom';
 
 export default class Table extends CommonComponent {
   static className = 'excel__table';
@@ -60,7 +60,6 @@ export default class Table extends CommonComponent {
     if (shouldResize(event)) {
       resizeHandler(event, this.$root);
     } else if (isCell(event)) {
-      // event.preventDefault();
       selectionMouseHandler(event, this);
     }
   }
