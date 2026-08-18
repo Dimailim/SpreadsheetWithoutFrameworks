@@ -170,6 +170,8 @@ class Dom {
     if (!this.$nativeElement.style.length) {
       this.$nativeElement.removeAttribute('style');
     }
+
+    return this;
   }
 
   /**
@@ -182,7 +184,7 @@ class Dom {
   }
 
   /**
-   * Adds class to DOM element.
+   * Adds class to a DOM element.
    * @param {string} className
    */
   addClass(className) {
@@ -211,7 +213,7 @@ class Dom {
       const id = this.id().split(':');
       return {
         row: +id[0],
-        col: +id[1],
+        col: +id[1]
       };
     }
 
