@@ -6,7 +6,7 @@ export default class Toolbar extends CommonComponent {
   /**
    * @param {Dom} $root
    */
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Toolbar',
       listeners: ['click']

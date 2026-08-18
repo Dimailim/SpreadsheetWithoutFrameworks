@@ -18,11 +18,33 @@ class Dom {
   }
 
   /**
+   * Sets text data to a DOM element.
+   * @param {string} text
+   * @returns {Dom}
+   */
+  setText(text) {
+    this.$nativeElement.textContent = text;
+    return this;
+  }
+
+  /**
    * Returns HTML markup data from a DOM element.
    * @returns {string}
    */
   getValue() {
     return this.$nativeElement.outerHTML.trim();
+  }
+
+  /**
+   * Returns text data from a DOM element.
+   * @returns {string}
+   */
+  getText() {
+    if (this.$nativeElement.tagName.toLowerCase() === 'input') {
+      return this.$nativeElement.value.trim();
+    }
+
+    return this.$nativeElement.textContent.trim();
   }
 
   /**
