@@ -38,6 +38,9 @@ export default class Formula extends CommonComponent {
     this.$on('table:input', (text) => {
       this.$formula.setText(text);
     });
+    /* this.$subscribe((state) => {
+      console.log('FormulaState', state);
+    });*/
   }
 
   /**

@@ -5,6 +5,7 @@ import resizeHandler from '@/components/table/table.resize';
 import {shouldResize, isCell} from '@/components/table/table.functions';
 import TableSelection from '@/components/table/TableSelection';
 import {selectionKeyboardHandler, selectionMouseHandler} from '@/components/table/table.selection';
+import * as actions from '@/redux/actions';
 
 export default class Table extends CommonComponent {
   static className = 'excel__table';
@@ -41,6 +42,9 @@ export default class Table extends CommonComponent {
     this.$on('formula:done', () => {
       this.selection.currentCell.focus();
     });
+    /* this.$subscribe((state) => {
+      console.log('TableState', state);
+    });*/
   }
 
   /**
@@ -53,12 +57,26 @@ export default class Table extends CommonComponent {
   }
 
   /**
+   * Resizes table and saves new sizes of columns or rows in the state.
+   * @param {MouseEvent} event
+   * @returns {Promise<void>}
+   */
+  async resizeTable(event) {
+    try {
+      const data = await resizeHandler(event, this.$root);
+      this.$dispatch(actions.tableResize(data));
+    } catch (e) {
+      console.error('Resize table error', e);
+    }
+  }
+
+  /**
    * Logic for handling mouse-down events
    * @param {MouseEvent} event
    */
   onMousedown(event) {
     if (shouldResize(event)) {
-      resizeHandler(event, this.$root);
+      this.resizeTable(event);
     } else if (isCell(event)) {
       selectionMouseHandler(event, this);
     }

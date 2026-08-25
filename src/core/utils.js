@@ -52,3 +52,16 @@ export function range(start, end) {
       .fill(null)
       .map((_, index) => start + index);
 }
+
+/**
+ * Manages local storage.
+ * @param {string} key - key for localStorage
+ * @param {Object} [data] - data that will be saved in localStorage
+ * @returns {Object}
+ */
+export function storage(key, data = null) {
+  if (!data) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+}

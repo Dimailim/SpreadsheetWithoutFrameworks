@@ -10,6 +10,8 @@ export default class CommonComponent extends DomListener {
     this.name = options.name || '';
     this.emitter = options.emitter;
     this.unsubscribers = [];
+    this.store = options.store;
+    this.storeSub = null;
 
     this.prepare();
   }
@@ -43,6 +45,22 @@ export default class CommonComponent extends DomListener {
   }
 
   /**
+   * Notifies the store about the state changes.
+   * @param {{type: ACTION_TYPES, data: Object}}action
+   */
+  $dispatch(action) {
+    this.store.dispatch(action);
+  }
+
+  /**
+   * Subscribes to the store changes.
+   * @param {function} fn
+   */
+  $subscribe(fn) {
+    this.storeSub = this.store.subscribe(fn);
+  }
+
+  /**
    * Method can call some logic before initializing a component.
    */
   prepare() {
@@ -63,5 +81,6 @@ export default class CommonComponent extends DomListener {
   destroy() {
     this.removeDOMListeners();
     this.unsubscribers.forEach((unsub) => unsub());
+    this.storeSub.unsubscribe();
   }
 }

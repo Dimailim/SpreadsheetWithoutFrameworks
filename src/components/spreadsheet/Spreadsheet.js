@@ -8,12 +8,20 @@ import Emitter from '@core/Emitter';
 export default class Spreadsheet {
   /**
    * @param {string} selector
-   * @param {{components:[]}} options
+   * @param {{
+   * components:[],
+   * store: {
+   * subscribe(Function): {unsubscribe(): void},
+   * dispatch({type: string}): void,
+   * getState(): *
+   * }
+   * }} options
    */
   constructor(selector, options) {
     this.$element = $(selector);
     this.components = options.components || [];
     this.emitter = new Emitter();
+    this.store = options.store;
   }
 
   /**
@@ -23,7 +31,8 @@ export default class Spreadsheet {
   getRoot() {
     const $root = $.create('div', 'excel');
     const componentOptions = {
-      emitter: this.emitter
+      emitter: this.emitter,
+      store: this.store,
     };
 
     this.components = this.components.map((Component) => {
