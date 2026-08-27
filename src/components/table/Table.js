@@ -23,7 +23,7 @@ export default class Table extends CommonComponent {
   }
 
   toHtml() {
-    return createTable();
+    return createTable(26, this.store.getState());
   }
 
   prepare() {

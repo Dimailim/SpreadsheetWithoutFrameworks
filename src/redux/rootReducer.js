@@ -7,12 +7,15 @@ import {ACTION_TYPES} from './types';
  * @returns {*}
  */
 export default function rootReducer(state, action) {
-  let currentColState;
+  let currentState;
+  let stateType;
+
   switch (action.type) {
     case ACTION_TYPES.TABLE_RESIZE:
-      currentColState = state.colState || {};
-      currentColState[action.data.id] = action.data.value;
-      return {...state, colState: currentColState};
+      stateType = action.data.type === 'column' ? 'colState' : 'rowState';
+      currentState = state[stateType] || {};
+      currentState[action.data.id] = action.data.value;
+      return {...state, [stateType]: currentState};
     default: return state;
   }
 }

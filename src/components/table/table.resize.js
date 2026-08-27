@@ -52,7 +52,8 @@ export default function resizeHandler(event, $root) {
       }
       resolve({
         value: sizeTo,
-        id: type === 'column' ? $header.data.col : null
+        id: type === 'column' ? $header.data.col : $header.data.row,
+        type
       });
     };
   });

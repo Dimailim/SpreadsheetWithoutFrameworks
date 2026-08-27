@@ -6,6 +6,7 @@ export default class Formula extends CommonComponent {
 
   /**
    * @param {Dom} $root
+   * @param {Object} options
    */
   constructor($root, options) {
     super($root, {
