@@ -1,5 +1,6 @@
 import $ from '@core/dom';
 import Emitter from '@core/Emitter';
+import StoreSubscriber from '@core/StoreSubscriber';
 
 /**
  * Main application entry point
@@ -22,6 +23,7 @@ export default class Spreadsheet {
     this.components = options.components || [];
     this.emitter = new Emitter();
     this.store = options.store;
+    this.subscriber = new StoreSubscriber(this.store);
   }
 
   /**
@@ -51,6 +53,7 @@ export default class Spreadsheet {
    */
   render() {
     this.$element.append(this.getRoot());
+    this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }
 
@@ -58,6 +61,7 @@ export default class Spreadsheet {
    * Destroys components.
    */
   destroy() {
+    this.subscriber.unsubscribeFromStore();
     this.components.forEach((component) => component.destroy());
   }
 }

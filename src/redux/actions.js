@@ -11,3 +11,15 @@ export function tableResize(data) {
     data,
   };
 }
+
+/**
+ * Action for changing text.
+ * @param {Object} data
+ * @returns {{type: ACTION_TYPES|number, data: Object}}
+ */
+export function changeText(data) {
+  return {
+    type: ACTION_TYPES.CHANGE_TEXT,
+    data,
+  };
+}

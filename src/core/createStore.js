@@ -39,7 +39,7 @@ export function createStore(rootReducer, initialState = {}) {
      * @returns {*}
      */
     getState() {
-      return state;
+      return JSON.parse(JSON.stringify(state));
     }
   };
 }

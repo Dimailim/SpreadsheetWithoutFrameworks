@@ -12,6 +12,7 @@ export default class Formula extends CommonComponent {
     super($root, {
       name: 'Formula',
       listeners: ['input', 'keydown'],
+      subscribes: ['currentText'],
       ...options
     });
   }
@@ -36,12 +37,10 @@ export default class Formula extends CommonComponent {
     this.$on('table:select', ($selectedCell) => {
       this.$formula.setText($selectedCell.getText());
     });
-    this.$on('table:input', (text) => {
-      this.$formula.setText(text);
-    });
-    /* this.$subscribe((state) => {
-      console.log('FormulaState', state);
-    });*/
+  }
+
+  storeChanged({currentText}) {
+    this.$formula.setText(currentText);
   }
 
   /**

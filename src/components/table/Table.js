@@ -38,6 +38,7 @@ export default class Table extends CommonComponent {
 
     this.$on('formula:input', (text) => {
       this.selection.currentCell.setText(text);
+      this.updateTextInStore(text);
     });
     this.$on('formula:done', () => {
       this.selection.currentCell.focus();
@@ -71,6 +72,17 @@ export default class Table extends CommonComponent {
   }
 
   /**
+   * Updates text in store
+   * @param {string} value
+   */
+  updateTextInStore(value) {
+    this.$dispatch(actions.changeText({
+      id: this.selection.currentCell.id(),
+      value
+    }));
+  }
+
+  /**
    * Logic for handling mouse-down events
    * @param {MouseEvent} event
    */
@@ -95,6 +107,7 @@ export default class Table extends CommonComponent {
    * @param {InputEvent} event
    */
   onInput(event) {
-    this.$emit('table:input', $(event.target).getText());
+    // this.$emit('table:input', $(event.target).getText());
+    this.updateTextInStore($(event.target).getText());
   }
 }

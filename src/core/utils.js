@@ -65,3 +65,16 @@ export function storage(key, data = null) {
   }
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+/**
+ * Checks if two data are equal.
+ * @param {*} sourceData
+ * @param {*} currentData
+ */
+export function isEqual(sourceData, currentData) {
+  if (typeof sourceData === 'object' && typeof currentData === 'object') {
+    return JSON.stringify(sourceData) === JSON.stringify(currentData);
+  }
+
+  return sourceData === currentData;
+}

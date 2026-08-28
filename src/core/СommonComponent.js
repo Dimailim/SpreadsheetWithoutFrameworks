@@ -12,6 +12,7 @@ export default class CommonComponent extends DomListener {
     this.unsubscribers = [];
     this.store = options.store;
     this.storeSub = null;
+    this.subscribes = options.subscribes || [];
 
     this.prepare();
   }
@@ -23,6 +24,39 @@ export default class CommonComponent extends DomListener {
    */
   toHtml() {
     return '';
+  }
+
+  /**
+   * Method can call some logic before initializing a component.
+   */
+  prepare() {
+
+  }
+
+
+  /**
+   * Initializes DOM listeners for a component.
+   */
+  init() {
+    this.initDOMListeners();
+  }
+
+  /**
+   * Gets changes from the subscribed components and checks if the state needs to be updated
+   * @param {Object} changes
+   */
+  storeChanged(changes) {
+
+  }
+
+
+  /**
+   * Checks if the state object key contains in a subscribes of component
+   * @param {string} key
+   * @returns {boolean}
+   */
+  isWatching(key) {
+    return this.subscribes.includes(key);
   }
 
   /**
@@ -46,33 +80,10 @@ export default class CommonComponent extends DomListener {
 
   /**
    * Notifies the store about the state changes.
-   * @param {{type: ACTION_TYPES, data: Object}}action
+   * @param {{type: (ACTION_TYPES|number), data: Object}}action
    */
   $dispatch(action) {
     this.store.dispatch(action);
-  }
-
-  /**
-   * Subscribes to the store changes.
-   * @param {function} fn
-   */
-  $subscribe(fn) {
-    this.storeSub = this.store.subscribe(fn);
-  }
-
-  /**
-   * Method can call some logic before initializing a component.
-   */
-  prepare() {
-
-  }
-
-
-  /**
-   * Initializes DOM listeners for a component.
-   */
-  init() {
-    this.initDOMListeners();
   }
 
   /**
