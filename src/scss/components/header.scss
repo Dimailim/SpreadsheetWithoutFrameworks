@@ -2,7 +2,7 @@
 @use "../mixins" as m;
 
 .excel__header {
-  position: absolute;
+  position: sticky;
   top: 0;
   right: 0;
   left: 0;
@@ -10,6 +10,8 @@
   padding: 8px 4px 0;
   display: flex;
   justify-content: space-between;
+  z-index: v.$header-z-index;
+  background-color: v.$main-color;
 
 
    & .excel__header-title-input { // & - Inheritance parent styles
@@ -34,5 +36,6 @@
 
   & .button {
     @include m.button(red);
+    user-select: none;
   }
 }
