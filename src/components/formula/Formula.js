@@ -1,5 +1,6 @@
 import CommonComponent from '@core/СommonComponent';
 import $ from '@core/dom';
+// import {debounce} from '@core/utils';
 
 export default class Formula extends CommonComponent {
   static className = 'excel__formula';
@@ -24,8 +25,7 @@ export default class Formula extends CommonComponent {
   toHtml() {
     return `
       <div class="formula-info">fx</div>
-      <div class="formula-input" contenteditable="true" spellcheck="false" id="formula-input">
-      </div>
+      <input class="formula-input" spellcheck="false" id="formula-input"/>
     `;
   }
 
@@ -35,7 +35,8 @@ export default class Formula extends CommonComponent {
     this.$formula = this.$root.find('#formula-input');
 
     this.$on('table:select', ($selectedCell) => {
-      this.$formula.setText($selectedCell.getText());
+      const dataValue = $selectedCell.data.value || '';
+      this.$formula.setText(dataValue);
     });
   }
 
