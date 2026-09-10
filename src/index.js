@@ -1,6 +1,6 @@
 import './scss/index.scss';
 import {createStore} from '@core/createStore';
-import {storage} from '@core/utils';
+import {debounce, storage} from '@core/utils';
 import rootReducer from '@/redux/rootReducer';
 
 // Components
@@ -12,11 +12,10 @@ import Table from '@/components/table/Table';
 
 const store = createStore(rootReducer,
     storage('spreadsheet-state'));
-
-store.subscribe((state) => {
-  console.log('App state', state);
+const stateListener = debounce((state) => {
   storage('spreadsheet-state', state);
-});
+}, 300);
+store.subscribe(stateListener);
 
 const se = new Spreadsheet('#app', {
   components: [Header, Toolbar, Formula, Table],

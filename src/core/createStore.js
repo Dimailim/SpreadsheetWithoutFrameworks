@@ -4,7 +4,7 @@
  * @param {Object} initialState
  * @returns {{
  * subscribe(Function): {unsubscribe(): void},
- * dispatch({type: string}): void,
+ * dispatch({type: ACTION_TYPES|number, data:*}): void,
  * getState(): *}
  * }
  */

@@ -1,5 +1,6 @@
 import $ from '@core/dom';
 import {cellsRange, nextSelection} from '@/components/table/table.functions';
+import parse from '@core/parse';
 
 /**
  * Logic for cell selection using mouse.
@@ -30,6 +31,10 @@ export function selectionKeyboardHandler(event, table) {
 
   if (keys.includes(key) && !event.shiftKey) {
     event.preventDefault();
+    // Parsed value for calculating if it's necessary.
+    const parsedValue = parse(table.selection.currentCell.data.value);
+    table.selection.currentCell.setText(parsedValue);
+    // Selecting to next cell
     const id = table.selection.currentCell.id(true);
     const $nextCell = table.$root.find(nextSelection(key, id));
     table.selectCell($nextCell);

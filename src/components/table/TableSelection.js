@@ -1,9 +1,18 @@
 export default class TableSelection {
   static className = 'selected';
+
   constructor() {
     /** @type {Dom[]} */
     this.selectedGroup = [];
     this.currentCell = null;
+  }
+
+  /**
+   * Returns an array of the selected cells IDs.
+   * @returns {string[]}
+   */
+  get selectedIds() {
+    return this.selectedGroup.map((selectedElement) => selectedElement.id());
   }
 
   /**
@@ -34,5 +43,15 @@ export default class TableSelection {
       selectedElement.removeClass(TableSelection.className);
     });
     this.selectedGroup = [];
+  }
+
+  /**
+   * Applies the given style to the selected cells.
+   * @param {Object} style
+   */
+  applyStyle(style) {
+    this.selectedGroup.forEach(($selectedElement) => {
+      $selectedElement.css(style);
+    });
   }
 }
