@@ -8,7 +8,6 @@ import StoreSubscriber from '@core/StoreSubscriber';
  */
 export default class Spreadsheet {
   /**
-   * @param {string} selector
    * @param {{
    * components:CommonComponent[],
    * store: {
@@ -18,8 +17,7 @@ export default class Spreadsheet {
    * }
    * }} options
    */
-  constructor(selector, options) {
-    this.$element = $(selector);
+  constructor(options) {
     this.components = options.components || [];
     this.emitter = new Emitter();
     this.store = options.store;
@@ -49,16 +47,15 @@ export default class Spreadsheet {
   }
 
   /**
-   * Adds spreadsheet components to the root DOM element.
+   * Initializes component.
    */
-  render() {
-    this.$element.append(this.getRoot());
+  init() {
     this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }
 
   /**
-   * Destroys components.
+   * Destroys component.
    */
   destroy() {
     this.subscriber.unsubscribeFromStore();
