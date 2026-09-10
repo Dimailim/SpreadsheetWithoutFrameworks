@@ -5,6 +5,10 @@ import resizeHandler from '@/components/table/table.resize';
 import {shouldResize, isCell} from '@/components/table/table.functions';
 import TableSelection from '@/components/table/TableSelection';
 import {selectionKeyboardHandler, selectionMouseHandler} from '@/components/table/table.selection';
+import * as actions from '@/redux/actions';
+import {DEFAULT_STYLES} from '@/constants';
+import {isStylesEmpty} from '@core/utils';
+import parse from '@core/parse';
 
 export default class Table extends CommonComponent {
   static className = 'excel__table';
@@ -22,7 +26,7 @@ export default class Table extends CommonComponent {
   }
 
   toHtml() {
-    return createTable();
+    return createTable(26, this.store.getState());
   }
 
   prepare() {
@@ -35,11 +39,23 @@ export default class Table extends CommonComponent {
     const $defaultSelectedCell = this.$root.find('[data-id="0:0"]');
     this.selectCell($defaultSelectedCell);
 
-    this.$on('formula:input', (text) => {
-      this.selection.currentCell.setText(text);
+    this.$on('formula:input', (value) => {
+      this.selection.currentCell
+          .setAttribute('data-value', value)
+          .setText(value);
+      this.updateTextInStore(value);
     });
     this.$on('formula:done', () => {
+      const parsedValue = parse(this.selection.currentCell.data.value);
+      this.selection.currentCell.setText(parsedValue);
       this.selection.currentCell.focus();
+    });
+    this.$on('toolbar:applyStyle', (style) => {
+      this.selection.applyStyle(style);
+      this.$dispatch(actions.applyStyle({
+        id: this.selection.selectedIds,
+        value: style
+      }));
     });
   }
 
@@ -50,6 +66,34 @@ export default class Table extends CommonComponent {
   selectCell($cell) {
     this.selection.select($cell);
     this.$emit('table:select', $cell);
+    const styles = isStylesEmpty($cell.getStyles(Object.keys(DEFAULT_STYLES))) ? DEFAULT_STYLES :
+      $cell.getStyles(Object.keys(DEFAULT_STYLES));
+    this.$dispatch(actions.changeStyles(styles));
+  }
+
+  /**
+   * Resizes table and saves new sizes of columns or rows in the state.
+   * @param {MouseEvent} event
+   * @returns {Promise<void>}
+   */
+  async resizeTable(event) {
+    try {
+      const data = await resizeHandler(event, this.$root);
+      this.$dispatch(actions.tableResize(data));
+    } catch (e) {
+      console.error('Resize table error', e);
+    }
+  }
+
+  /**
+   * Updates text in store
+   * @param {string} value
+   */
+  updateTextInStore(value) {
+    this.$dispatch(actions.changeText({
+      id: this.selection.currentCell.id(),
+      value
+    }));
   }
 
   /**
@@ -58,7 +102,7 @@ export default class Table extends CommonComponent {
    */
   onMousedown(event) {
     if (shouldResize(event)) {
-      resizeHandler(event, this.$root);
+      this.resizeTable(event);
     } else if (isCell(event)) {
       selectionMouseHandler(event, this);
     }
@@ -77,6 +121,8 @@ export default class Table extends CommonComponent {
    * @param {InputEvent} event
    */
   onInput(event) {
-    this.$emit('table:input', $(event.target).getText());
+    const target = $(event.target);
+    target.setAttribute('data-value', target.getText());
+    this.updateTextInStore($(event.target).getText());
   }
 }

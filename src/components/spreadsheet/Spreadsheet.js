@@ -1,5 +1,6 @@
 import $ from '@core/dom';
 import Emitter from '@core/Emitter';
+import StoreSubscriber from '@core/StoreSubscriber';
 
 /**
  * Main application entry point
@@ -8,12 +9,21 @@ import Emitter from '@core/Emitter';
 export default class Spreadsheet {
   /**
    * @param {string} selector
-   * @param {{components:[]}} options
+   * @param {{
+   * components:[],
+   * store: {
+   * subscribe(Function): {unsubscribe(): void},
+   * dispatch({type: string}): void,
+   * getState(): *
+   * }
+   * }} options
    */
   constructor(selector, options) {
     this.$element = $(selector);
     this.components = options.components || [];
     this.emitter = new Emitter();
+    this.store = options.store;
+    this.subscriber = new StoreSubscriber(this.store);
   }
 
   /**
@@ -23,7 +33,8 @@ export default class Spreadsheet {
   getRoot() {
     const $root = $.create('div', 'excel');
     const componentOptions = {
-      emitter: this.emitter
+      emitter: this.emitter,
+      store: this.store,
     };
 
     this.components = this.components.map((Component) => {
@@ -42,6 +53,7 @@ export default class Spreadsheet {
    */
   render() {
     this.$element.append(this.getRoot());
+    this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }
 
@@ -49,6 +61,7 @@ export default class Spreadsheet {
    * Destroys components.
    */
   destroy() {
+    this.subscriber.unsubscribeFromStore();
     this.components.forEach((component) => component.destroy());
   }
 }

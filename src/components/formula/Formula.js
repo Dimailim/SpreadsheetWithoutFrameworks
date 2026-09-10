@@ -6,11 +6,13 @@ export default class Formula extends CommonComponent {
 
   /**
    * @param {Dom} $root
+   * @param {Object} options
    */
   constructor($root, options) {
     super($root, {
       name: 'Formula',
       listeners: ['input', 'keydown'],
+      subscribes: ['currentText'],
       ...options
     });
   }
@@ -22,8 +24,7 @@ export default class Formula extends CommonComponent {
   toHtml() {
     return `
       <div class="formula-info">fx</div>
-      <div class="formula-input" contenteditable="true" spellcheck="false" id="formula-input">
-      </div>
+      <input class="formula-input" spellcheck="false" id="formula-input"/>
     `;
   }
 
@@ -33,11 +34,13 @@ export default class Formula extends CommonComponent {
     this.$formula = this.$root.find('#formula-input');
 
     this.$on('table:select', ($selectedCell) => {
-      this.$formula.setText($selectedCell.getText());
+      const dataValue = $selectedCell.data.value || '';
+      this.$formula.setText(dataValue);
     });
-    this.$on('table:input', (text) => {
-      this.$formula.setText(text);
-    });
+  }
+
+  storeChanged({currentText}) {
+    this.$formula.setText(currentText);
   }
 
   /**

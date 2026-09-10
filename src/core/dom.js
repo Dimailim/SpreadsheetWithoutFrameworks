@@ -23,7 +23,11 @@ class Dom {
    * @returns {Dom}
    */
   setText(text) {
-    this.$nativeElement.textContent = text;
+    if (this.$nativeElement.tagName.toLowerCase() === 'input') {
+      this.$nativeElement.value = text;
+    } else {
+      this.$nativeElement.textContent = text;
+    }
     return this;
   }
 
@@ -141,6 +145,18 @@ class Dom {
   }
 
   /**
+   * Returns inline styles of the element which are specified in the style array.
+   * @param {string[]} styles
+   * @returns {{[key: string]: string;}}
+   */
+  getStyles(styles = []) {
+    return styles.reduce((res, style) => {
+      res[style] = this.$nativeElement.style[style];
+      return res;
+    }, {});
+  }
+
+  /**
    * Returns dataset of the element.
    * @returns {DOMStringMap}
    */
@@ -226,6 +242,17 @@ class Dom {
    */
   focus() {
     this.$nativeElement.focus();
+    return this;
+  }
+
+  /**
+   * Sets new meta-attribute for the DOM element.
+   * @param {string} name - attribute's name.
+   * @param {string} value
+   * @returns {Dom}
+   */
+  setAttribute(name, value) {
+    this.$nativeElement.setAttribute(name, value);
     return this;
   }
 }
