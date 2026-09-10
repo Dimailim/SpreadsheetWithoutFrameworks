@@ -9,7 +9,14 @@ export default class Header extends CommonComponent {
 
   /**
    * @param {Dom} $root
-   * @param {Object} options
+   * @param {{
+   * emitter:Emitter,
+   * store: {
+   * subscribe(Function): {unsubscribe(): void},
+   * dispatch({type: ACTION_TYPES|number, data:*}): void,
+   * getState(): Object
+   * }
+   * }} options
    */
   constructor($root, options) {
     super($root, {

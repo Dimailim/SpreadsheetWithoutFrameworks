@@ -3,18 +3,18 @@ import Emitter from '@core/Emitter';
 import StoreSubscriber from '@core/StoreSubscriber';
 
 /**
- * Main application entry point
+ * Main spreadsheet editor entry point
  * @class Spreadsheet
  */
 export default class Spreadsheet {
   /**
    * @param {string} selector
    * @param {{
-   * components:[],
+   * components:CommonComponent[],
    * store: {
    * subscribe(Function): {unsubscribe(): void},
-   * dispatch({type: string}): void,
-   * getState(): *
+   * dispatch({type: ACTION_TYPES|number, data:Object|string}): void,
+   * getState(): Object
    * }
    * }} options
    */

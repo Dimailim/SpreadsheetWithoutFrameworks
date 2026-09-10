@@ -1,21 +1,28 @@
 import CommonComponent from '@core/СommonComponent';
 import $ from '@core/dom';
+import {isStylesEmpty} from '@core/utils';
+import parse from '@core/parse';
 import {createTable} from '@/components/table/table.template';
 import resizeHandler from '@/components/table/table.resize';
 import {shouldResize, isCell} from '@/components/table/table.functions';
 import TableSelection from '@/components/table/TableSelection';
 import {selectionKeyboardHandler, selectionMouseHandler} from '@/components/table/table.selection';
-import * as actions from '@/redux/actions';
 import {DEFAULT_STYLES} from '@/constants';
-import {isStylesEmpty} from '@core/utils';
-import parse from '@core/parse';
+import * as actions from '@/redux/actions';
 
 export default class Table extends CommonComponent {
   static className = 'excel__table';
 
   /**
    * @param {Dom} $root
-   * @param {Object} options
+   * @param {{
+   * emitter:Emitter,
+   * store: {
+   * subscribe(Function): {unsubscribe(): void},
+   * dispatch({type: ACTION_TYPES|number, data:*}): void,
+   * getState(): Object
+   * }
+   * }} options
    */
   constructor($root, options) {
     super($root, {
@@ -74,7 +81,6 @@ export default class Table extends CommonComponent {
   /**
    * Resizes table and saves new sizes of columns or rows in the state.
    * @param {MouseEvent} event
-   * @returns {Promise<void>}
    */
   async resizeTable(event) {
     try {

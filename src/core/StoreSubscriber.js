@@ -1,6 +1,17 @@
 import {isEqual} from '@core/utils';
 
+/**
+ * This class subscribes to store changes for the given components.
+ * @class StoreSubscriber
+ */
 export default class StoreSubscriber {
+  /**
+   * @param {{
+   * subscribe(Function): {unsubscribe(): void},
+   * dispatch({type: ACTION_TYPES|number, data:*}): void,
+   * getState(): Object
+   * }} store
+   */
   constructor(store) {
     this.store = store;
     this.sub = null;
@@ -9,7 +20,7 @@ export default class StoreSubscriber {
 
   /**
    * Subscribes to store changes for the given components.
-   * @param components
+   * @param {CommonComponent[]} components
    */
   subscribeComponents(components) {
     this.prevState = this.store.getState();

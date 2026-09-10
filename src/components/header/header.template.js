@@ -1,8 +1,8 @@
 import {DEFAULT_FILENAME} from '@/constants';
 
 /**
- * Creates input element.
- * @param state
+ * Creates an input element.
+ * @param {Object} state
  * @returns {string} HTML markup
  */
 function createInput(state) {

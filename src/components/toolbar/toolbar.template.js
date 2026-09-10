@@ -1,3 +1,12 @@
+/**
+ * Creates a button element.
+ * @param {{
+ * iconName:string,
+ * active:boolean,
+ * value:{Object}
+ * }} button - button's properties'
+ * @returns {string} - HTML markup
+ */
 function createButton(button) {
   const meta = `
     data-type="button"

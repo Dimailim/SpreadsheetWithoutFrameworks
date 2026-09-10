@@ -61,7 +61,7 @@ export default class CommonComponent extends DomListener {
 
   /**
    * Notifies listeners about the event.
-   * @param {string}eventName
+   * @param {string} eventName
    * @param {...*}args
    */
   $emit(eventName, ...args) {

@@ -6,7 +6,14 @@ export default class Formula extends CommonComponent {
 
   /**
    * @param {Dom} $root
-   * @param {Object} options
+   * @param {{
+   * emitter:Emitter,
+   * store: {
+   * subscribe(Function): {unsubscribe(): void},
+   * dispatch({type: ACTION_TYPES|number, data:*}): void,
+   * getState(): Object
+   * }
+   * }} options
    */
   constructor($root, options) {
     super($root, {
@@ -44,8 +51,8 @@ export default class Formula extends CommonComponent {
   }
 
   /**
-   * Callback method for component listener.
-   * @param {Event} event
+   * Callback method for handling input event.
+   * @param {InputEvent} event
    */
   onInput(event) {
     this.$emit('formula:input', $(event.target).getText());

@@ -47,7 +47,7 @@ export default class TableSelection {
 
   /**
    * Applies the given style to the selected cells.
-   * @param {Object} style
+   * @param {{[attr:string]:string}} style
    */
   applyStyle(style) {
     this.selectedGroup.forEach(($selectedElement) => {

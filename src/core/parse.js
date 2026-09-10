@@ -1,6 +1,7 @@
 /**
- * Parses value for calculating.
- * @param {string} value
+ * Parses cell's value.
+ * If value is formula, tries to calculate it.
+ * @param {string} value - cell's value
  */
 export default function parse(value = '') {
   if (value.startsWith('=')) {
@@ -11,5 +12,6 @@ export default function parse(value = '') {
       console.warn(e);
     }
   }
+
   return value;
 }
