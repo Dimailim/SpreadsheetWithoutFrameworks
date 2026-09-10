@@ -119,6 +119,7 @@ export function debounce(fn, wait) {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       clearTimeout(timeout);
+      // this uses for saving context of wrapped method
       // eslint-disable-next-line no-invalid-this
       fn.apply(this, args);
     }, wait);

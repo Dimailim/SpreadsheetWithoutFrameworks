@@ -1,6 +1,5 @@
 import CommonComponent from '@core/СommonComponent';
 import $ from '@core/dom';
-// import {debounce} from '@core/utils';
 
 export default class Formula extends CommonComponent {
   static className = 'excel__formula';

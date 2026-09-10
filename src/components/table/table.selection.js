@@ -31,7 +31,7 @@ export function selectionKeyboardHandler(event, table) {
 
   if (keys.includes(key) && !event.shiftKey) {
     event.preventDefault();
-    // Parsed value for calculating if it's necessary.
+    // Parsing value for calculating if it's necessary.
     const parsedValue = parse(table.selection.currentCell.data.value);
     table.selection.currentCell.setText(parsedValue);
     // Selecting to next cell
