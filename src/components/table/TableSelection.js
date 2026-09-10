@@ -39,7 +39,7 @@ export default class TableSelection {
    * Removes previously selected cells from selectedGroup and removes the "selected" class from those elements.
    */
   removeSelect() {
-    this.selectedGroup.forEach((selectedElement, index) => {
+    this.selectedGroup.forEach((selectedElement) => {
       selectedElement.removeClass(TableSelection.className);
     });
     this.selectedGroup = [];
