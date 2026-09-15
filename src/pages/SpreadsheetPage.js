@@ -12,11 +12,10 @@ import Table from '@/components/table/Table';
 
 export default class SpreadsheetPage extends Page {
   getRoot() {
-    console.log(this.params);
     const store = createStore(rootReducer,
-        storage('spreadsheet-state'));
+        storage(this.storageName()));
     const stateListener = debounce((state) => {
-      storage('spreadsheet-state', state);
+      storage(this.storageName(), state);
     }, 300);
     store.subscribe(stateListener);
 
@@ -29,11 +28,19 @@ export default class SpreadsheetPage extends Page {
   }
 
   afterRender() {
-    console.log('SpreadsheetPage rendered');
     this.se.init();
   }
 
   destroy() {
     this.se.destroy();
+  }
+
+  /**
+   * Returns the name of the storage according to the params for the current page.
+   * @returns {string}
+   */
+  storageName() {
+    const id = this.params ? this.params : Date.now().toString();
+    return `spreadsheet:${id}`;
   }
 }

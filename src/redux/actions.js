@@ -59,3 +59,15 @@ export function applyStyle(data) {
     data
   };
 }
+
+/**
+* Action for changing the open date.
+* @param data
+* @returns {{type: ACTION_TYPES|number, data: number}}
+*/
+export function changeOpenDate(data) {
+  return {
+    type: ACTION_TYPES.OPEN_DATE,
+    data
+  };
+}

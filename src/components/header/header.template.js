@@ -1,29 +1,28 @@
-import {DEFAULT_FILENAME} from '@/constants';
-
 /**
  * Creates an input element.
  * @param {Object} state
  * @returns {string} HTML markup
  */
 function createInput(state) {
-  const value =state?.filenameState ? state.filenameState : DEFAULT_FILENAME;
   return `
     <input 
         type="text" class="excel__header-title-input" 
-        value="${value}" name="file-name"
+        value="${state.filenameState}" name="file-name"
+        autocomplete="off"
     />
   `;
 }
 
 /**
  * Creates a button element.
- * @param {{iconName:string}} button
+ * @param {{iconName:string, dataButton:string, title:string}} button
  * @returns {string} HTML markup
  */
 function createButton(button) {
+  const dataButton = `data-button="${button.dataButton}"`;
   return `
-    <div class="button">
-        <i class="material-icons">${button.iconName}</i>
+    <div class="button" ${dataButton} title="${button.title}">
+        <i class="material-icons" ${dataButton}">${button.iconName}</i>
     </div>
   `;
 }
@@ -49,8 +48,8 @@ function createButtonGroup(buttons) {
 export function createHeader(state) {
   const header = [];
   const buttons = [
-    {iconName: 'delete'},
-    {iconName: 'exit_to_app'}
+    {iconName: 'delete', dataButton: 'remove', title: 'Remove table'},
+    {iconName: 'exit_to_app', dataButton: 'exit', title: 'Exit'}
   ];
   const buttonsElems = buttons.map(createButton).join('');
 

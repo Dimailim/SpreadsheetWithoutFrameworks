@@ -31,6 +31,8 @@ export default function rootReducer(state, action) {
         [stateType]: updateCurrentState(state, stateType, action.data),
         currentStyles: {...state.currentStyles, ...action.data.value}
       };
+    case ACTION_TYPES.OPEN_DATE:
+      return {...state, openDate: action.data};
     default:
       return state;
   }

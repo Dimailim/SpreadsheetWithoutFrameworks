@@ -18,4 +18,12 @@ export default class ActiveRoute {
   static get param() {
     return ActiveRoute.path.split('/')[1];
   }
+
+  /**
+   * Changes url hash to the specified path.
+   * @param {string} path
+   */
+  static navigate(path) {
+    window.location.hash = path;
+  }
 }

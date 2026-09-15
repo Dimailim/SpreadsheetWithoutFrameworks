@@ -1,6 +1,7 @@
 import $ from '@core/dom';
 import Emitter from '@core/Emitter';
 import StoreSubscriber from '@core/StoreSubscriber';
+import * as action from '@/redux/actions';
 
 /**
  * Main spreadsheet editor entry point
@@ -50,6 +51,7 @@ export default class Spreadsheet {
    * Initializes component.
    */
   init() {
+    this.store.dispatch(action.changeOpenDate(Date.now()));
     this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }
