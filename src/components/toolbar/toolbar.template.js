@@ -58,6 +58,11 @@ export function createToolbar(state) {
       iconName: 'format_underlined',
       active: state.textDecoration === 'underline',
       value: {textDecoration: state.textDecoration === 'underline' ? 'none' : 'underline'}
+    },
+    {
+      iconName: 'format_strikethrough',
+      active: state.textDecoration === 'line-through',
+      value: {textDecoration: state.textDecoration === 'line-through' ? 'none' : 'line-through'}
     }
   ];
   return buttons.map(createButton).join('');
