@@ -134,7 +134,7 @@ class Dom {
    *   height: '100px',
    *   backgroundColor: 'red'
    * })
-   * @param {Object} styles
+   * @param {{[attr:string]:string}} styles
    */
   css(styles = {}) {
     Object.keys(styles).forEach((key) => {
@@ -200,7 +200,7 @@ class Dom {
   }
 
   /**
-   * Adds class to a DOM element.
+   * Adds a class to a DOM element.
    * @param {string} className
    */
   addClass(className) {
@@ -221,7 +221,7 @@ class Dom {
 
   /**
    * Returns id of a cell DOM element.
-   * @param {boolean} [parsed]
+   * @param {boolean} [parsed] - if true, returns an object with row and col numbers
    * @returns {{row: number, col: number}|string}
    */
   id(parsed) {

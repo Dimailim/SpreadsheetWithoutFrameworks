@@ -11,7 +11,7 @@ export function shouldResize(event) {
 
 /**
  * Checks if the event target is a cell.
- * @param event
+ * @param {Event} event
  * @returns {boolean}
  */
 export function isCell(event) {

@@ -11,7 +11,6 @@ export default class CommonComponent extends DomListener {
     this.emitter = options.emitter;
     this.unsubscribers = [];
     this.store = options.store;
-    this.storeSub = null;
     this.subscribes = options.subscribes || [];
 
     this.prepare();
@@ -61,7 +60,7 @@ export default class CommonComponent extends DomListener {
 
   /**
    * Notifies listeners about the event.
-   * @param {string}eventName
+   * @param {string} eventName
    * @param {...*}args
    */
   $emit(eventName, ...args) {
@@ -92,6 +91,5 @@ export default class CommonComponent extends DomListener {
   destroy() {
     this.removeDOMListeners();
     this.unsubscribers.forEach((unsub) => unsub());
-    this.storeSub.unsubscribe();
   }
 }

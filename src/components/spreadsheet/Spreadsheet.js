@@ -1,25 +1,24 @@
 import $ from '@core/dom';
 import Emitter from '@core/Emitter';
 import StoreSubscriber from '@core/StoreSubscriber';
+import * as action from '@/redux/actions';
 
 /**
- * Main application entry point
+ * Main spreadsheet editor entry point
  * @class Spreadsheet
  */
 export default class Spreadsheet {
   /**
-   * @param {string} selector
    * @param {{
-   * components:[],
+   * components:CommonComponent[],
    * store: {
    * subscribe(Function): {unsubscribe(): void},
-   * dispatch({type: string}): void,
-   * getState(): *
+   * dispatch({type: ACTION_TYPES|number, data:Object|string}): void,
+   * getState(): Object
    * }
    * }} options
    */
-  constructor(selector, options) {
-    this.$element = $(selector);
+  constructor(options) {
     this.components = options.components || [];
     this.emitter = new Emitter();
     this.store = options.store;
@@ -49,16 +48,16 @@ export default class Spreadsheet {
   }
 
   /**
-   * Adds spreadsheet components to the root DOM element.
+   * Initializes component.
    */
-  render() {
-    this.$element.append(this.getRoot());
+  init() {
+    this.store.dispatch(action.changeOpenDate(Date.now()));
     this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }
 
   /**
-   * Destroys components.
+   * Destroys component.
    */
   destroy() {
     this.subscriber.unsubscribeFromStore();

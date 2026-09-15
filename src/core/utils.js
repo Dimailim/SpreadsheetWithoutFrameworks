@@ -125,3 +125,12 @@ export function debounce(fn, wait) {
     }, wait);
   };
 }
+
+/**
+ * Returns a string with a date and time in the format 'dd.mm.yyyy hh:mm:ss'.
+ * @param {Date} date
+ * @returns {string}
+ */
+export function formatDateTime(date) {
+  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+}

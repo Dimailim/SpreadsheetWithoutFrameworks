@@ -2,8 +2,8 @@ import {ACTION_TYPES} from './types';
 
 /**
  * Action for table resize.
- * @param {Object} data
- * @returns {{type: ACTION_TYPES, data: Object}}
+ * @param {{id: string, value: number, type: string}} data
+ * @returns {{type: ACTION_TYPES, data: {id: string, value: number, type: string}}}
  */
 export function tableResize(data) {
   return {
@@ -14,8 +14,8 @@ export function tableResize(data) {
 
 /**
  * Action for changing text.
- * @param {Object} data
- * @returns {{type: ACTION_TYPES|number, data: Object}}
+ * @param {{id:string, value: string}} data
+ * @returns {{type: ACTION_TYPES|number, data: {id:string, value: string}}}
  */
 export function changeText(data) {
   return {
@@ -38,8 +38,8 @@ export function changeFilename(data) {
 
 /**
  * Action for changing cell's styles.
- * @param {Object} data
- * @returns {{type: ACTION_TYPES|number, data: Object}}
+ * @param {{[styleAttr:string]:string}} data
+ * @returns {{type: ACTION_TYPES|number, data: {[styleAttr:string]:string}}}
  */
 export function changeStyles(data) {
   return {
@@ -50,12 +50,24 @@ export function changeStyles(data) {
 
 /**
  * Action for applying style to selected cells.
- * @param {ids:string[], value:Object}data
- * @returns {{type: ACTION_TYPES|number, data: *}}
+ * @param {{ids:string[], value: {[styleAttr:string]:string}}}data
+ * @returns {{type: ACTION_TYPES|number, data: {ids:string[], value: {[styleAttr:string]:string}}}}
  */
 export function applyStyle(data) {
   return {
     type: ACTION_TYPES.APPLY_STYLE,
+    data
+  };
+}
+
+/**
+* Action for changing the open date.
+* @param data
+* @returns {{type: ACTION_TYPES|number, data: number}}
+*/
+export function changeOpenDate(data) {
+  return {
+    type: ACTION_TYPES.OPEN_DATE,
     data
   };
 }

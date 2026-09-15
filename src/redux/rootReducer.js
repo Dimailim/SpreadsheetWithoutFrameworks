@@ -2,9 +2,10 @@ import {ACTION_TYPES} from './types';
 
 /**
  * Creates and fill application state.
- * @param {Object} state - application state.
- * @param {{type:ACTION_TYPES, data:Object}} action - new data for state.
- * @returns {Object} - new state.
+ * @param {Object} state - current application state.
+ * @param {{type:ACTION_TYPES, data:{id:string|string[],value:Object|string}|
+ * {id:string, value:number, type:string}|string}} action - new data for state.
+ * @returns {Object} - new updated application state.
  */
 export default function rootReducer(state, action) {
   let stateType;
@@ -30,6 +31,8 @@ export default function rootReducer(state, action) {
         [stateType]: updateCurrentState(state, stateType, action.data),
         currentStyles: {...state.currentStyles, ...action.data.value}
       };
+    case ACTION_TYPES.OPEN_DATE:
+      return {...state, openDate: action.data};
     default:
       return state;
   }
@@ -39,12 +42,15 @@ export default function rootReducer(state, action) {
  * Updates current state of the application.
  * @param {Object} state - current application state before new changes.
  * @param {string} field - field name in the application state which need to be updated.
- * @param {{id:string|string[], value:*}} data - new data for the field.
+ * @param {{id: (string|string[]), value: (Object|string)}|string} data - new data for the field.
  * @returns {Object}
  */
 function updateCurrentState(state, field, data) {
   const currentState = state[field] || {};
 
+  if (typeof data === 'string') {
+    return data;
+  }
   if (Array.isArray(data.id)) {
     data.id.forEach((id) => {
       currentState[id] = {...currentState[id], ...data.value};

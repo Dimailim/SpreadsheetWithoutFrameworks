@@ -4,8 +4,8 @@
  * @param {Object} initialState
  * @returns {{
  * subscribe(Function): {unsubscribe(): void},
- * dispatch({type: ACTION_TYPES|number, data:*}): void,
- * getState(): *}
+ * dispatch({type: ACTION_TYPES|number, data:Object|string}): void,
+ * getState(): Object}
  * }
  */
 export function createStore(rootReducer, initialState = {}) {
@@ -28,7 +28,7 @@ export function createStore(rootReducer, initialState = {}) {
     },
     /**
      * Notify all listeners about state changes
-     * @param {{type:ACTION_TYPES}} action
+     * @param {{type:ACTION_TYPES, data:Object|string}} action
      */
     dispatch(action) {
       state = rootReducer(state, action);
@@ -36,7 +36,7 @@ export function createStore(rootReducer, initialState = {}) {
     },
     /**
      * Return current state
-     * @returns {*}
+     * @returns {Object}
      */
     getState() {
       return JSON.parse(JSON.stringify(state));
