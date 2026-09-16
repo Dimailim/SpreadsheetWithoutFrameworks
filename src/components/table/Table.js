@@ -1,7 +1,7 @@
-import CommonComponent from '@core/СommonComponent';
+import CommonComponent from '@core/common/СommonComponent';
 import $ from '@core/dom';
 import {isStylesEmpty} from '@core/utils';
-import parse from '@core/parse';
+import parse from '@core/formulaEngine/parse';
 import {createTable} from '@/components/table/table.template';
 import resizeHandler from '@/components/table/table.resize';
 import {shouldResize, isCell} from '@/components/table/table.functions';

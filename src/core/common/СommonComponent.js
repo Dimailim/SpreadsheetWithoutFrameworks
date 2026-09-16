@@ -1,4 +1,4 @@
-import DomListener from '@core/DomListener';
+import DomListener from '@core/common/DomListener';
 
 /**
  * This is an abstract class for components

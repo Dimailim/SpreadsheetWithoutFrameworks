@@ -1,4 +1,4 @@
-import CommonComponent from '@core/СommonComponent';
+import CommonComponent from '@core/common/СommonComponent';
 import $ from '@core/dom';
 
 export default class Formula extends CommonComponent {

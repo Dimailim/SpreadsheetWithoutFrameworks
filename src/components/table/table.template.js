@@ -1,6 +1,6 @@
 import {toInlineStyles} from '@core/utils';
 import {DEFAULT_STYLES} from '@/constants';
-import parse from '@core/parse';
+import parse from '@core/formulaEngine/parse';
 
 /**
  * Collection of codes for columns.

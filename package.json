@@ -1,12 +1,14 @@
 {
-  "name": "excelwithoutframeworks",
+  "name": "spreadsheet-without-frameworks",
   "version": "1.0.0",
   "description": "Trainee project: Excel without frameworks",
   "main": "webpack.config.js",
   "scripts": {
     "start": "webpack server --mode=development",
     "build": "webpack --mode=production",
-    "lint": "npx eslint ./src"
+    "lint": "npx eslint ./src",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": [
     "Trainee",
@@ -43,6 +45,9 @@
     "eslint-webpack-plugin": "^5.0.3",
     "globals": "^17.4.0",
     "html-webpack-plugin": "^5.6.3",
+    "jest": "^30.5.1",
+    "jest-environment-jsdom": "^30.5.1",
+    "jest-location-mock": "^4.0.1",
     "mini-css-extract-plugin": "^2.9.4",
     "regenerator-runtime": "^0.14.1",
     "sass": "^1.90.0",
