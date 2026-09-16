@@ -1,6 +1,6 @@
 import $ from '@core/dom';
 import {cellsRange, nextSelection} from '@/components/table/table.functions';
-import parse from '@core/parse';
+import parse from '@core/formulaEngine/parse';
 
 /**
  * Logic for cell selection using mouse.

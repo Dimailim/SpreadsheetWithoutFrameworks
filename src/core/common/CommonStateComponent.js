@@ -1,4 +1,4 @@
-import CommonComponent from '@core/СommonComponent';
+import CommonComponent from '@core/common/СommonComponent';
 
 export default class CommonStateComponent extends CommonComponent {
   constructor(...args) {

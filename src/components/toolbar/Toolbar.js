@@ -1,5 +1,5 @@
 import $ from '@core/dom';
-import CommonStateComponent from '@core/CommonStateComponent';
+import CommonStateComponent from '@core/common/CommonStateComponent';
 import {createToolbar} from '@/components/toolbar/toolbar.template';
 import {DEFAULT_STYLES} from '@/constants';
 
