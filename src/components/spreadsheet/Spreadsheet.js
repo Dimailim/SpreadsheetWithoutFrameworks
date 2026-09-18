@@ -39,7 +39,7 @@ export default class Spreadsheet {
     this.components = this.components.map((Component) => {
       const $element = $.create('div', Component.className);
       const component = new Component($element, componentOptions);
-      $element.setValue(component.toHtml());
+      $element.setHtml(component.toHtml());
       $root.append($element);
       return component;
     });

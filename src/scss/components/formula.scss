@@ -2,7 +2,7 @@
 @use "../mixins" as m;
 
 .excel__formula {
-  position: sticky;
+  position: fixed;
   left: 0;
   right: 0;
   top: v.$header-height + v.$toolbar-height;

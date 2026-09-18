@@ -2,7 +2,7 @@
 @use "../mixins" as m;
 
 .excel__header {
-  position: sticky;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;

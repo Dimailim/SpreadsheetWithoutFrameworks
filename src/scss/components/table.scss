@@ -2,11 +2,10 @@
 @use "../mixins" as m;
 
 .excel__table {
-  position: absolute;
+  position: relative;
   right: 0;
   left: 0;
   top: v.$header-height + v.$toolbar-height + v.$formula-height;
-  overflow-x: auto;
   padding-bottom: 2px;
 
   .row {

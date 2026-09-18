@@ -12,7 +12,7 @@ class Dom {
    * @param {string} html
    * @returns {Dom}
    */
-  setValue(html) {
+  setHtml(html) {
     this.$nativeElement.innerHTML = html;
     return this;
   }
@@ -35,7 +35,7 @@ class Dom {
    * Returns HTML markup data from a DOM element.
    * @returns {string}
    */
-  getValue() {
+  getHtml() {
     return this.$nativeElement.outerHTML.trim();
   }
 
@@ -56,7 +56,7 @@ class Dom {
    * @returns {Dom}
    */
   clear() {
-    this.setValue('');
+    this.setHtml('');
     return this;
   }
 

@@ -30,7 +30,7 @@ export default class Header extends CommonComponent {
 
   prepare() {
     this.onInput = debounce(this.onInput, 300);
-    if (!this.store.filenameState) {
+    if (!this.store.getState().filenameState) {
       this.$dispatch(actions.changeFilename(DEFAULT_FILENAME));
     }
   }
