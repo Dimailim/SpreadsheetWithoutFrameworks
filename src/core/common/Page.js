@@ -9,7 +9,7 @@ export default class Page {
 
   /**
    * Returns the root element of the page.
-   * @returns {Promise<Dom>}
+   * @returns {Promise<Dom>|Dom}
    */
   getRoot() {
     throw new Error('getRoot method should be implemented');

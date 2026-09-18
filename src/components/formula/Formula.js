@@ -31,7 +31,7 @@ export default class Formula extends CommonComponent {
   toHtml() {
     return `
       <div class="formula-info">fx</div>
-      <input class="formula-input" spellcheck="false" id="formula-input"/>
+      <input class="formula-input" spellcheck="false" id="formula-input" autocomplete="off"/>
     `;
   }
 
