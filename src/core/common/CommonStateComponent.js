@@ -27,6 +27,6 @@ export default class CommonStateComponent extends CommonComponent {
    */
   setState(newState) {
     this.state = {...this.state, ...newState};
-    this.$root.setValue(this.template);
+    this.$root.setHtml(this.template);
   }
 }

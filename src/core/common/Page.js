@@ -4,12 +4,12 @@
  */
 export default class Page {
   constructor(params) {
-    this.params = params;
+    this.params = params || Date.now().toString();
   }
 
   /**
    * Returns the root element of the page.
-   * @returns {Dom}
+   * @returns {Promise<Dom>}
    */
   getRoot() {
     throw new Error('getRoot method should be implemented');
