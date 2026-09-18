@@ -1,11 +1,11 @@
 import Page from '@core/common/Page';
 import $ from '@core/dom';
-import {createRecordsTable} from '@/pages/dashboard.functions';
+import {createRecordsTable} from '@/shared/dashboard.functions';
 
 export default class DashboardPage extends Page {
   getRoot() {
     const newId = Date.now().toString();
-    return $.create('div', 'db').setValue(`
+    return $.create('div', 'db').setHtml(`
        <header class="db__header">
         <h1>Spreadsheet Editor Dashboard</h1>
        </header>
