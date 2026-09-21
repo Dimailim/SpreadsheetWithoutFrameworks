@@ -6,5 +6,6 @@ export default defineConfig({
   moduleFileExtensions: ['js'],
   moduleNameMapper: {
     '@core/(.*)': '<rootDir>/src/core/$1',
+    '@/(.*)': '<rootDir>/src/$1',
   }
 });
