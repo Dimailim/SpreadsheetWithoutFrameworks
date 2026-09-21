@@ -35,16 +35,16 @@ describe('Router testing:', () => {
     expect(router).toBeDefined();
   });
 
-  test('should render dashboard page', () => {
+  test('should render dashboard page', async () => {
     window.location.hash = '#';
-    router.changePageHandler();
+    await router.changePageHandler();
 
     expect($root.innerHTML).toBe('<div><h1>Dashboard</h1></div>');
   });
 
-  test('should render spreadsheet page', () => {
+  test('should render spreadsheet page', async () => {
     window.location.hash = '#spreadsheet/123';
-    router.changePageHandler();
+    await router.changePageHandler();
 
     expect($root.innerHTML).toBe('<div><h1>Spreadsheet</h1></div>');
   });
