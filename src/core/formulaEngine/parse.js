@@ -8,8 +8,8 @@ export default function parse(value = '') {
     try {
       return eval(value.slice(1));
     } catch (e) {
-      alert('Inputted formula is invalid.');
       console.warn(e);
+      return '#ERROR!';
     }
   }
 

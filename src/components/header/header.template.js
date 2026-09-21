@@ -1,3 +1,5 @@
+import {escapeHtml} from '@core/utils';
+
 /**
  * Creates an input element.
  * @param {Object} state
@@ -7,7 +9,7 @@ function createInput(state) {
   return `
     <input 
         type="text" class="excel__header-title-input" 
-        value="${state.filenameState}" name="file-name"
+        value="${escapeHtml(state.filenameState)}" name="file-name"
         autocomplete="off"
     />
   `;
@@ -22,7 +24,7 @@ function createButton(button) {
   const dataButton = `data-button="${button.dataButton}"`;
   return `
     <div class="button" ${dataButton} title="${button.title}">
-        <i class="material-icons" ${dataButton}">${button.iconName}</i>
+        <i class="material-icons" ${dataButton}>${button.iconName}</i>
     </div>
   `;
 }
