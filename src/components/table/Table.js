@@ -1,4 +1,4 @@
-import CommonComponent from '@core/common/СommonComponent';
+import CommonComponent from '@core/common/CommonComponent';
 import $ from '@core/dom';
 import {isStylesEmpty} from '@core/utils';
 import parse from '@core/formulaEngine/parse';

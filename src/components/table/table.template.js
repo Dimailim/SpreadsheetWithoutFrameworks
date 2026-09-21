@@ -1,4 +1,4 @@
-import {toInlineStyles} from '@core/utils';
+import {escapeHtml, toInlineStyles} from '@core/utils';
 import {DEFAULT_STYLES} from '@/constants';
 import parse from '@core/formulaEngine/parse';
 
@@ -67,7 +67,7 @@ function getInlineStyle(styles) {
  * @returns {string}
  */
 function getDataValue(content) {
-  return content ? `data-value="${content}"` : '';
+  return content ? `data-value="${escapeHtml(content)}"` : '';
 }
 
 /**
@@ -133,9 +133,9 @@ function createCell(rowIndex, state) {
           data-col="${columnIndex}"
           data-id="${id}"
           data-type="cell"
-          ${getDataValue(content)}"
+          ${getDataValue(content)}
           ${style}
-        >${parse(content) || ''}</div>
+        >${escapeHtml( parse(content) ?? '')}</div>
     `;
   };
 }

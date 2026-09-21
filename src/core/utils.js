@@ -134,3 +134,17 @@ export function debounce(fn, wait) {
 export function formatDateTime(date) {
   return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 }
+
+/**
+ * Replaces unsafe symbols for HTML to safe one.
+ * @param {string} value
+ * @returns {string}
+ */
+export function escapeHtml(value) {
+  return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+}

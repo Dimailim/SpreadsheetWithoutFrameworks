@@ -46,7 +46,7 @@ export default function rootReducer(state, action) {
  * @returns {Object}
  */
 function updateCurrentState(state, field, data) {
-  const currentState = state[field] || {};
+  const currentState = {...(state[field] || {})};
 
   if (typeof data === 'string') {
     return data;

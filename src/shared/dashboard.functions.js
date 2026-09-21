@@ -1,4 +1,4 @@
-import {formatDateTime, storage} from '@core/utils';
+import {escapeHtml, formatDateTime, storage} from '@core/utils';
 
 /**
  * Gets data from localStorage and render record in HTML markup.
@@ -11,7 +11,7 @@ function toHTML(keyFromLocalStorage) {
 
   return `
     <li class="db__record">
-      <a href="#spreadsheet/${id}">${seState.filenameState}</a>
+      <a href="#spreadsheet/${id}">${escapeHtml(seState.filenameState)}</a>
       <strong>${formatDateTime(new Date(seState.openDate))}</strong>
     </li>
   `;
