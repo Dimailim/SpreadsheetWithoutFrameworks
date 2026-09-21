@@ -1,7 +1,7 @@
 {
   "name": "spreadsheet-without-frameworks",
   "version": "1.0.0",
-  "description": "Trainee project: Excel without frameworks",
+  "description": "Trainee project: Spreadsheet editor without frameworks",
   "main": "webpack.config.js",
   "scripts": {
     "start": "webpack server --mode=development",
